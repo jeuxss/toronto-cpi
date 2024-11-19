@@ -1,2 +1,8 @@
-# toronto-cpi
-Analysis of Toronto CPI data 
+# Analysis of Toronto CPI data
+ 
+This project is attempts to analyse and model the trends in CPI for key factors in cost of living in Toronto. Additional data preprocessing was done on average rent prices in specific neighborhoods of Toronto.
+Data sources: [Statistics Canada Ontario CPI (2002-2024)](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810000401&pickMembers%5B0%5D=1.14&cubeTimeFrame.startMonth=01&cubeTimeFrame.startYear=2002&cubeTimeFrame.endMonth=09&cubeTimeFrame.endYear=2024&referencePeriods=20020101%2C20240901), [Toronto Neighborhood Rentals (2002-2024)]([url](https://www03.cmhc-schl.gc.ca/hmip-pimh/en/TableMapChart/Table?TableId=2.2.11&GeographyId=2270&GeographyTypeId=3&DisplayAs=Table&GeograghyName=Toronto))
+
+## Motivation and Methods 
+The aim is to analyze and model core cost-of-living aspects measured in CPI for a single, child-free person living in rented accommodation in Toronto who only uses public transit. The core variates we included in the models were Toronto-specific rent and utility (water, fuel, electricity) indices, as well as food, transportation, healthcare, phone and internet, and alcohol/tobacco/recreational product indices in Ontario. Since the data is a multivariate time series, ACF and PACF plots were generated of each variate to check for stationarity and differenced accordingly. 
+With this, vector auto-regreesion (VAR) models and vector error correction models (VECM) were considered, as the covariates are most likely not independent (i.e. modelling each variate separately and adding their results together is likely not optimal). VAR models use an AR process to model the vector of observed variables, assuming all variables are stationary. VECM models assume some combination of the variates are stationary and includes an error term for "correction". Sum of squares was used to evaluate the models, and the best model/lowest sum of squares was the VAR model. 
